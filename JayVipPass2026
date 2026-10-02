@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Passe VIP Jay 2026</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1e1e2f, #121212);
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: #2a2a40;
+      border: 2px solid #ff007f;
+      border-radius: 16px;
+      padding: 30px;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 10px 25px rgba(255, 0, 127, 0.3);
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff007f;
+      margin-bottom: 20px;
+      font-size: 26px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #444;
+      background: #1e1e2f;
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #ff007f;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #ff007f;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background: #e0006c;
+    }
+
+    /* Style spécifique pour le bouton Déconnexion */
+    .btn-logout {
+      background: #444;
+      margin-top: 20px;
+    }
+
+    .btn-logout:hover {
+      background: #555;
+    }
+
+    .error-msg {
+      color: #ff4d4d;
+      text-align: center;
+      margin-top: 15px;
+      font-weight: bold;
+      display: none;
+    }
+
+    /* Écran des cartes VIP */
+    .vip-dashboard {
+      display: none;
+    }
+
+    .welcome-title {
+      font-size: 22px;
+      color: #00ffcc;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    .user-code {
+      text-align: center;
+      color: #aaa;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .card-section-title {
+      font-size: 18px;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #ff007f;
+      padding-bottom: 5px;
+    }
+
+    .vip-card {
+      background: #1e1e2f;
+      border: 1px solid #00ffcc;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    .vip-card p {
+      margin: 10px 0;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .vip-card strong {
+      color: #ff007f;
+    }
+
+    /* Style de la forme illustrée */
+    .shape-container {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .shape-svg {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      fill: #00ffcc;
+    }
+
+    .footer-info {
+      text-align: center;
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px dashed #555;
+    }
+
+    .expiration {
+      color: #ffcc00;
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .thanks {
+      color: #00ffcc;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Passe VIP Jay 2026</h1>
+
+    <!-- Formulaire de connexion -->
+    <div id="login-form">
+      <div class="form-group">
+        <label for="username">Nom utilisateur :</label>
+        <input type="text" id="username" placeholder="Entrez votre nom">
+      </div>
+      <div class="form-group">
+        <label for="id-code">Code d'identification (donné par Jaycob) :</label>
+        <input type="text" id="id-code" placeholder="Entrez le code">
+      </div>
+      <div class="form-group">
+        <label for="key">Clé :</label>
+        <input type="password" id="key" placeholder="Entrez la clé">
+      </div>
+      <button onclick="validerPasse()">Accéder</button>
+      <p id="error-message" class="error-msg"></p>
+    </div>
+
+    <!-- Écran VIP -->
+    <div id="vip-dashboard" class="vip-dashboard">
+      <h2 id="welcome-header" class="welcome-title"></h2>
+      <p id="code-display" class="user-code"></p>
+
+      <div class="card-section-title">Carte vip actif :</div>
+
+      <div class="vip-card">
+        <p><strong>Type :</strong> <span id="card-type"></span></p>
+        <p><strong>Numéro :</strong> <span id="card-number"></span></p>
+        <p><strong>Forme :</strong> <span class="shape-container"><span id="card-shape-text"></span><span id="card-shape-icon"></span></span></p>
+        <p><strong>Conditions :</strong> <span id="card-conditions"></span></p>
+      </div>
+
+      <div class="footer-info">
+        <div class="expiration">DATE D'EXPIRATION : 10 OCTOBRE 8H PM</div>
+        <div class="thanks">MERCI !</div>
+      </div>
+
+      <!-- Bouton pour quitter la session -->
+      <button class="btn-logout" onclick="quitterSession()">Déconnexion</button>
+    </div>
+  </div>
+
+  <script>
+    const CLE_COMMUNE = "JayVIPPass2026";
+
+    // Symboles SVG pour illustrer chaque forme
+    const shapesSVG = {
+      triangle: `<svg class="shape-svg" viewBox="0 0 24 24"><polygon points="12,2 22,20 2,20"/></svg>`,
+      cercle: `<svg class="shape-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>`,
+      ovale: `<svg class="shape-svg" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="11" ry="7"/></svg>`,
+      étoile: `<svg class="shape-svg" viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>`,
+      carrée: `<svg class="shape-svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>`
+    };
+
+    const users = [
+      {
+        nom: "James",
+        code: "8928",
+        cle: "Clevip122",
+        type: "VIP NORMAL",
+        numero: "61789",
+        formeKey: "triangle",
+        formeText: "triangle",
+        conditions: "AUCUNE"
+      },
+      {
+        nom: "Maély",
+        code: "89265",
+        cle: "Clevip881",
+        type: "VIP NORMAL",
+        numero: "679109",
+        formeKey: "cercle",
+        formeText: "cercle",
+        conditions: "AUCUNE"
+      },
+      {
+        nom: "Sarah",
+        code: "892817",
+        cle: "Clevip+fastpass671",
+        type: "VIP+",
+        numero: "+JayFast8818",
+        formeKey: "ovale",
+        formeText: "Ovale",
+        conditions: "AUCUNE"
+      },
+      {
+        nom: "Anthony",
+        code: "892717",
+        cle: "clevip882",
+        type: "VIP NORMAL",
+        numero: "71617",
+        formeKey: "étoile",
+        formeText: "étoile",
+        conditions: "UTILISATION SEULEMENT QUAND CHARLES N'EST PAS LA"
+      },
+      {
+        nom: "Mia",
+        code: "892451",
+        cle: "Clevip-",
+        type: "VIP-",
+        numero: "-Jay8182900",
+        formeKey: "carrée",
+        formeText: "Carrée",
+        conditions: "Aucune"
+      }
+    ];
+
+    function validerPasse() {
+      const inputNom = document.getElementById("username").value.trim();
+      const inputCode = document.getElementById("id-code").value.trim();
+      const inputCle = document.getElementById("key").value.trim();
+      const errorMsg = document.getElementById("error-message");
+
+      const user = users.find(u => u.nom.toLowerCase() === inputNom.toLowerCase());
+
+      if (!user) {
+        errorMsg.innerText = "Nom utilisateur introuvable !";
+        errorMsg.style.display = "block";
+        return;
+      }
+
+      if (user.code !== inputCode) {
+        errorMsg.innerText = "Code d'identification incorrect !";
+        errorMsg.style.display = "block";
+        return;
+      }
+
+      if (user.cle !== inputCle && inputCle !== CLE_COMMUNE) {
+        errorMsg.innerText = "Clé incorrecte !";
+        errorMsg.style.display = "block";
+        return;
+      }
+
+      errorMsg.style.display = "none";
+      document.getElementById("login-form").style.display = "none";
+      document.getElementById("vip-dashboard").style.display = "block";
+
+      document.getElementById("welcome-header").innerText = `Bienvenue ${user.nom} consulte tes cartes vip !`;
+      document.getElementById("code-display").innerText = `(${user.code})`;
+
+      document.getElementById("card-type").innerText = user.type;
+      document.getElementById("card-number").innerText = user.numero;
+      document.getElementById("card-shape-text").innerText = user.formeText;
+      document.getElementById("card-shape-icon").innerHTML = shapesSVG[user.formeKey] || '';
+      document.getElementById("card-conditions").innerText = user.conditions;
+    }
+
+    function quitterSession() {
+      // Masquer le tableau de bord VIP et réafficher le formulaire
+      document.getElementById("vip-dashboard").style.display = "none";
+      document.getElementById("login-form").style.display = "block";
+
+      // Réinitialiser les champs de saisie
+      document.getElementById("username").value = "";
+      document.getElementById("id-code").value = "";
+      document.getElementById("key").value = "";
+      document.getElementById("error-message").style.display = "none";
+    }
+  </script>
+</body>
+</html>
